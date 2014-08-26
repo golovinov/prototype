@@ -6,7 +6,6 @@
  */
 Number.prototype.secondsToTime = function(format) {
     
-    
     var order = [
         [{l:"d",m:86400,p:true},{l:"j",m:86400,p:false}],
         [{l:"H",m:3600,p:true},{l:"G",m:3600,p:false}],
@@ -15,7 +14,7 @@ Number.prototype.secondsToTime = function(format) {
     ],
        seconds = this;
        
-    var doReplace = function(string, partial) {
+    var replacer = function(string, partial) {
         
         var counter = 0;
         
@@ -43,10 +42,9 @@ Number.prototype.secondsToTime = function(format) {
     };
        
     format = format.replace(/\[([^\]]+)\]/g,function(full, rpl){
-        return doReplace(rpl, true);
+        return replacer(rpl, true);
     });
     
-    
-    format = doReplace(format,false);
+    format = replacer(format,false);
     return format;
 };
